@@ -1,0 +1,60 @@
+{
+ "id": "_sample",
+ "title": "Kit Sample",
+ "images": [],
+ "audio": [
+  {
+   "key": "bgm_lobby",
+   "kind": "bgm",
+   "file": "assets/audio/bgm_lobby.mp3"
+  },
+  {
+   "key": "bgm_play",
+   "kind": "bgm",
+   "file": "assets/audio/bgm_play.mp3"
+  },
+  {
+   "key": "sfx_tap",
+   "kind": "sfx",
+   "file": "assets/audio/sfx_tap.mp3"
+  },
+  {
+   "key": "sfx_open",
+   "kind": "sfx",
+   "file": "assets/audio/sfx_open.mp3"
+  },
+  {
+   "key": "sfx_pop",
+   "kind": "sfx",
+   "file": "assets/audio/sfx_pop.mp3"
+  },
+  {
+   "key": "sfx_tier",
+   "kind": "sfx",
+   "file": "assets/audio/sfx_tier.mp3"
+  },
+  {
+   "key": "sfx_record",
+   "kind": "sfx",
+   "file": "assets/audio/sfx_record.mp3"
+  },
+  {
+   "key": "sfx_over",
+   "kind": "sfx",
+   "file": "assets/audio/sfx_over.mp3"
+  },
+  {
+   "key": "sfx_tick",
+   "kind": "sfx",
+   "file": "assets/audio/sfx_tick.mp3"
+  },
+  {
+   "key": "sfx_whiff",
+   "kind": "sfx",
+   "file": "assets/audio/sfx_whiff.mp3"
+  }
+ ],
+ "style": {
+  "letterbox": "#20143a"
+ }
+}

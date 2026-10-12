@@ -1,0 +1,13 @@
+{
+  "name": "mini-game-pipeline",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bundle": "node tools/bundle.mjs",
+    "qa": "node tools/qa/run.mjs"
+  },
+  "devDependencies": {
+    "phaser": "^3.90.0",
+    "playwright": "^1.64.0"
+  }
+}

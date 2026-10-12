@@ -1,0 +1,25 @@
+# 비밀 — 절대 커밋 금지
+.env
+# 설치 산출물
+node_modules/
+.venv/
+# 만든 게임은 각자 로컬에만 (kit 회귀용 샘플과 레지스트리 템플릿만 공유)
+games/*
+!games/_sample/
+!games/REGISTRY.template.md
+games/_sample/build/
+games/_sample/dist/
+games/_sample/qa/
+# 사운드 라이브러리 원본 다운로드
+tools/sound_lib/_downloads/
+# 기타
+.DS_Store
+.playwright-mcp/
+.pipeline/
+inbox/
+__pycache__/
+*.pyc
+# 개인 실험(수집 데이터 포함) — 커밋 금지
+experiments/
+# 시네마틱 필름 작업물(대용량 렌더 산출물)
+films/
