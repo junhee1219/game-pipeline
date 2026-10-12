@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>미니게임 오락실 — 설치 없이 바로 하는 게임 6개</title>
+<meta name="description" content="한 판 1분, 브라우저에서 바로 시작하는 캐주얼 게임 6개. 만년 성벽 · 모닥불 개척단 · 와르르 보물산 · 와장창 철거단 · 별 낚시꾼 · 울타리 목장">
+<meta name="theme-color" content="#8FD0FF">
+<meta property="og:type" content="website">
+<meta property="og:title" content="미니게임 오락실">
+<meta property="og:description" content="설치 없이, 지금 바로. 한 판 1분 캐주얼 게임 6개">
+<meta property="og:url" content="https://junhee1219.github.io/game-pipeline/">
+<meta property="og:image" content="https://junhee1219.github.io/game-pipeline/a/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="./a/icon.png">
+<link rel="apple-touch-icon" href="./a/icon.png">
+<link rel="preload" as="image" href="./a/hoard-hero.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --ink: #1B2150; --ink-2: #4A5280; --cream: #FFF6E6; --sun: #FFC531; --sun-edge: #E59A00;
+    --go: #3CC14E; --go-edge: #1E8A2E;
+    --display: "Gasoek One", "Pretendard Variable", Pretendard, sans-serif;
+    --body: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    --spring: cubic-bezier(.34, 1.56, .64, 1); --out: cubic-bezier(.22, 1, .36, 1); --settle: cubic-bezier(.3, .7, .4, 1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--cream); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { font-family: var(--body); color: var(--ink); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; overflow-x: hidden; word-break: keep-all; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  :focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 12px; }
+
+  /* ── 히어로: 하늘 무대 + 캐릭터 라인업 */
+  .hero { position: relative; isolation: isolate; overflow: hidden; text-align: center;
+    padding: max(40px, calc(env(safe-area-inset-top) + 26px)) 20px 0;
+    background: linear-gradient(180deg, #8FD0FF 0%, #BFE4FF 36%, #FFE9C6 80%, #FFDDA6 100%); }
+  .sky { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .sun { position: absolute; left: 50%; bottom: 6%; width: min(130vw, 1200px); aspect-ratio: 1; translate: -50% 50%; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(255,248,222,.95), rgba(255,228,160,.55) 45%, rgba(255,214,140,0) 72%); }
+  .cloud { position: absolute; height: var(--h); width: calc(var(--h) * 2.4); left: var(--l); top: var(--t); border-radius: 999px; background: #fff; opacity: .85;
+    box-shadow: calc(var(--h) * .5) calc(var(--h) * -.35) 0 calc(var(--h) * .05) #fff, calc(var(--h) * 1.2) calc(var(--h) * -.1) 0 calc(var(--h) * -.06) #fff;
+    animation: drift var(--d) ease-in-out infinite alternate; }
+  @keyframes drift { to { transform: translateX(var(--dx)); } }
+  .kicker { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px; letter-spacing: .12em; color: #2A5CA8;
+    background: rgba(255,255,255,.75); padding: 7px 14px 7px 12px; border-radius: 999px; box-shadow: 0 2px 0 rgba(42,92,168,.12); }
+  .kicker i { width: 8px; height: 8px; border-radius: 50%; background: var(--go); box-shadow: 0 0 0 3px rgba(60,193,78,.22); }
+  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(56px, 15vw, 132px); line-height: 1.02; letter-spacing: -.005em; margin-top: 14px;
+    color: #fff; -webkit-text-stroke: clamp(6px, 1.5vw, 13px) var(--ink); paint-order: stroke fill;
+    text-shadow: 0 clamp(5px, 1.2vw, 10px) 0 var(--ink), 0 clamp(12px, 2.4vw, 22px) 26px rgba(27,33,80,.25); }
+  h1 .pop { color: var(--sun); }
+  .lede { margin: 16px auto 0; font-size: clamp(15px, 3.9vw, 19px); line-height: 1.5; font-weight: 650; color: var(--ink-2); }
+  .cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; padding: 15px 24px 15px 28px; border-radius: 999px; text-decoration: none;
+    font-weight: 800; font-size: 17px; color: var(--ink); background: linear-gradient(180deg, #FFE27A, var(--sun)); border: 2px solid #fff;
+    box-shadow: 0 6px 0 var(--sun-edge), 0 14px 24px -8px rgba(229,154,0,.6); transition: transform .25s var(--settle), box-shadow .25s var(--settle); }
+  .cta svg { width: 18px; height: 18px; transition: transform .3s var(--spring); }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--sun-edge), 0 18px 28px -8px rgba(229,154,0,.65); }
+  .cta:hover svg { transform: translateY(3px); }
+  .cta:active { transform: translateY(5px); box-shadow: 0 1px 0 var(--sun-edge), 0 6px 12px -6px rgba(229,154,0,.6); transition-duration: 34ms; }
+
+  .lineup { position: relative; width: min(1180px, 110vw); left: 50%; translate: -50% 0; margin-top: clamp(4px, 2vw, 20px); aspect-ratio: 100 / 33; }
+  .ground { position: absolute; left: -12%; right: -12%; bottom: -1px; height: 24%; border-radius: 50% 50% 0 0 / 100% 100% 0 0; background: var(--cream); }
+  .char { position: absolute; left: var(--x); width: var(--w); bottom: calc(9% + var(--b)); z-index: var(--z); text-decoration: none; }
+  .char::before { content: ""; position: absolute; left: 20%; right: 20%; bottom: 3%; height: 8%; border-radius: 50%; background: rgba(110,60,10,.2); filter: blur(5px); }
+  .char-in { position: relative; display: block; animation: bob 4.4s ease-in-out calc(var(--i) * -.73s) infinite; }
+  .char img { width: 100%; height: auto; transition: transform .45s var(--spring), filter .3s; transform-origin: 50% 95%; }
+  .char:hover img, .char:focus-visible img { transform: translateY(-5%) scale(1.07) rotate(-2deg); filter: drop-shadow(0 0 16px rgba(255,255,255,.95)); }
+  .char-tag { position: absolute; left: 50%; top: -2%; translate: -50% 8px; white-space: nowrap; font-weight: 800; font-size: 13px; padding: 7px 12px; border-radius: 999px;
+    background: var(--ink); color: #fff; opacity: 0; transition: opacity .2s, translate .35s var(--spring); pointer-events: none; z-index: 2; }
+  .char-tag::after { content: ""; position: absolute; left: 50%; bottom: -5px; translate: -50% 0; border: 6px solid transparent; border-top-color: var(--ink); border-bottom: 0; }
+  .char:hover .char-tag, .char:focus-visible .char-tag { opacity: 1; translate: -50% 0; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3%); } }
+
+  /* ── 게임 카드: 배경·캐릭터·로고 3겹 패럴랙스 포스터 */
+  main { position: relative; padding: 6px 14px 24px; max-width: 1240px; margin: 0 auto; }
+  .sec { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 4px 18px; }
+  .sec h2 { font-family: var(--display); font-weight: 400; font-size: clamp(27px, 6.6vw, 42px); letter-spacing: -.005em; }
+  .sec p { font-size: 13.5px; font-weight: 650; color: var(--ink-2); white-space: nowrap; }
+  .grid { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; }
+  @media (min-width: 720px) { main { padding: 18px 28px 40px; } .sec { margin-bottom: 26px; } .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 28px; } }
+  .grid li { perspective: 1000px; }
+  .card { --rx: 0deg; --ry: 0deg; --px: 0; --py: 0; --sy: 0; --gx: 50%; --gy: 30%; --lift: 0px; --edge: 7px;
+    position: relative; display: flex; flex-direction: column; height: 100%; text-decoration: none; border-radius: 26px; padding: 7px;
+    background: #fff; transform: translateY(var(--lift)) rotateX(var(--rx)) rotateY(var(--ry));
+    box-shadow: 0 var(--edge) 0 color-mix(in srgb, var(--accent) 58%, #3a1a00), 0 calc(var(--edge) + 14px) 30px -12px color-mix(in srgb, var(--accent) 70%, transparent);
+    transition: transform .6s var(--settle), box-shadow .6s var(--settle); }
+  .poster { position: relative; display: block; aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden; isolation: isolate; background: color-mix(in srgb, var(--accent) 40%, #222); }
+  .poster img { position: absolute; max-width: none; height: auto; will-change: transform; transition: transform .6s var(--settle); }
+  .l-bg { left: -8%; top: -8%; width: 116%; height: 116%; object-fit: cover; object-position: 50% 30%;
+    transform: translate3d(calc(var(--px) * -10px), calc(var(--py) * -10px + var(--sy) * -18px), 0); }
+  .l-hero { width: 88%; left: 6%; bottom: -9%; filter: drop-shadow(0 10px 12px rgba(0,0,0,.35));
+    transform: translate3d(calc(var(--px) * 12px), calc(var(--py) * 8px + var(--sy) * 8px), 0); }
+  .l-logo { width: 66%; left: 17%; top: -5%; filter: drop-shadow(0 6px 8px rgba(0,0,0,.35));
+    transform: translate3d(calc(var(--px) * 18px), calc(var(--py) * 14px + var(--sy) * 16px), 0); }
+  .poster::after { content: ""; position: absolute; inset: 0; z-index: 3; border-radius: inherit; pointer-events: none;
+    box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.35), inset 0 -44px 50px -34px rgba(0,0,0,.4); }
+  .glare { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; transition: opacity .4s;
+    background: radial-gradient(circle at var(--gx) var(--gy), rgba(255,255,255,.6), rgba(255,255,255,0) 55%); mix-blend-mode: soft-light; }
+  .play { position: absolute; z-index: 5; right: 9px; bottom: 9px; width: clamp(40px, 11vw, 52px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+    background: linear-gradient(180deg, #7BE36A, var(--go)); border: 2.5px solid #E2FFD6; box-shadow: 0 4px 0 var(--go-edge), 0 8px 14px rgba(0,0,0,.3);
+    transition: transform .45s var(--spring); }
+  .play svg { width: 46%; fill: #fff; margin-left: 8%; }
+  .info { display: flex; flex-direction: column; gap: 7px; padding: 13px 7px 7px; flex: 1; }
+  .name { font-size: 18.5px; font-weight: 850; letter-spacing: -.025em; line-height: 1.2; }
+  .hook { font-size: 14px; line-height: 1.5; font-weight: 550; color: var(--ink-2); flex: 1; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .tag { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 750; line-height: 1; padding: 6px 9px; border-radius: 999px; }
+  .tag-genre { color: color-mix(in srgb, var(--accent) 50%, #2a1600); background: color-mix(in srgb, var(--accent) 16%, #fff); }
+  .tag-verb { color: var(--ink-2); background: #EEF0F7; }
+  .tag-verb svg { width: 13px; height: 13px; fill: currentColor; }
+  @media (max-width: 420px) { .name { font-size: 16.5px; } .hook { font-size: 13px; } .tag { font-size: 11px; padding: 5px 8px; } .card { border-radius: 22px; padding: 6px; } .poster { border-radius: 17px; } }
+
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover { --lift: -8px; --edge: 9px; transition: transform .25s var(--settle), box-shadow .25s var(--settle); }
+    .card:hover .glare { opacity: 1; }
+    .card:hover .play { transform: scale(1.12) rotate(-6deg); }
+    .card.tilting, .card.tilting .poster img { transition-duration: .12s; transition-timing-function: linear; }
+  }
+  .card:active { --lift: 4px; --edge: 2px; transition-duration: 34ms !important; }
+
+  /* ── 푸터 */
+  footer { position: relative; margin-top: 40px; padding: 40px 24px max(40px, env(safe-area-inset-bottom)); text-align: center; color: #C9CDE6; background: var(--ink); }
+  footer::before { content: ""; position: absolute; left: 0; right: 0; top: -22px; height: 23px; background: var(--ink);
+    -webkit-mask: radial-gradient(22px 23px at 50% 0, transparent 98%, #000) 50% 0 / 44px 23px repeat-x; mask: radial-gradient(22px 23px at 50% 0, transparent 98%, #000) 50% 0 / 44px 23px repeat-x; }
+  .foot-title { font-family: var(--display); font-size: 26px; color: #fff; }
+  .foot-lines { margin-top: 12px; font-size: 13px; line-height: 1.8; }
+  .foot-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .foot-links a { text-decoration: none; font-size: 13px; font-weight: 700; color: #fff; padding: 9px 14px; border-radius: 999px; background: rgba(255,255,255,.1); transition: background .2s; }
+  .foot-links a:hover { background: rgba(255,255,255,.2); }
+
+  /* ── 등장 모션 (움직임 줄이기 설정이면 끔) */
+  @media (prefers-reduced-motion: no-preference) {
+    .js .kicker, .js .lede, .js .cta { animation: rise .8s var(--out) both; }
+    .js h1 { animation: pop .9s var(--spring) .06s both; }
+    .js .lede { animation-delay: .16s; } .js .cta { animation-delay: .22s; }
+    .js .char { animation: charIn .9s var(--spring) calc(.28s + var(--i) * .07s) both; }
+    .js .grid li { opacity: 0; transform: translateY(26px) scale(.96); transition: opacity .6s var(--out), transform .7s var(--out); transition-delay: calc(var(--d, 0) * 70ms); }
+    .js .grid li.in { opacity: 1; transform: none; }
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+  @keyframes pop { from { opacity: 0; transform: translateY(18px) scale(.86); } }
+  @keyframes charIn { from { opacity: 0; transform: translateY(40%) scale(.85); } }
+  @media (prefers-reduced-motion: reduce) { .cloud, .char-in { animation: none; } *, *::before, *::after { transition-duration: .01ms !important; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="sky" aria-hidden="true">
+    <span class="sun"></span>
+    <span class="cloud" style="--h:24px;--l:5%;--t:13%;--d:26s;--dx:50px"></span>
+    <span class="cloud" style="--h:16px;--l:74%;--t:8%;--d:22s;--dx:-40px"></span>
+    <span class="cloud" style="--h:30px;--l:82%;--t:31%;--d:30s;--dx:-60px"></span>
+    <span class="cloud" style="--h:14px;--l:18%;--t:40%;--d:24s;--dx:36px"></span>
+  </div>
+  <p class="kicker"><i></i>설치 없이 · 지금 바로</p>
+  <h1>미니게임<br><span class="pop">오락실</span></h1>
+  <p class="lede">한 판 1분, 누르면 바로 시작하는<br>캐주얼 게임 6개</p>
+  <a class="cta" href="#games">게임 고르기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+  <div class="lineup">
+    <a class="char" href="./corral/" aria-label="울타리 목장 플레이" style="--x:1%;--w:21%;--z:2;--b:0%;--i:0"><span class="char-in"><img src="./a/corral-hero.webp" alt="" width="560" height="560"></span><span class="char-tag">울타리 목장</span></a>
+    <a class="char" href="./starhook/" aria-label="별 낚시꾼 플레이" style="--x:15.5%;--w:22%;--z:3;--b:3%;--i:1"><span class="char-in"><img src="./a/starhook-hero.webp" alt="" width="560" height="560"></span><span class="char-tag">별 낚시꾼</span></a>
+    <a class="char" href="./bonfire/" aria-label="모닥불 개척단 플레이" style="--x:31%;--w:18%;--z:4;--b:1%;--i:2"><span class="char-in"><img src="./a/bonfire-hero.webp" alt="" width="560" height="560"></span><span class="char-tag">모닥불 개척단</span></a>
+    <a class="char" href="./hoard/" aria-label="와르르 보물산 플레이" style="--x:41%;--w:25%;--z:6;--b:0%;--i:3"><span class="char-in"><img src="./a/hoard-hero.webp" alt="" width="560" height="560" fetchpriority="high"></span><span class="char-tag">와르르 보물산</span></a>
+    <a class="char" href="./wreck/" aria-label="와장창 철거단 플레이" style="--x:61%;--w:22%;--z:4;--b:2%;--i:4"><span class="char-in"><img src="./a/wreck-hero.webp" alt="" width="560" height="560"></span><span class="char-tag">와장창 철거단</span></a>
+    <a class="char" href="./epoch/" aria-label="만년 성벽 플레이" style="--x:80%;--w:18.5%;--z:3;--b:0%;--i:5"><span class="char-in"><img src="./a/epoch-hero.webp" alt="" width="560" height="560"></span><span class="char-tag">만년 성벽</span></a>
+    <span class="ground" aria-hidden="true"></span>
+  </div>
+</header>
+
+<main id="games">
+  <div class="sec"><h2>오늘은 뭐 할까?</h2><p>세로 화면 추천</p></div>
+  <ul class="grid">
+    <li style="--accent:#C9783A">
+      <a class="card" href="./epoch/">
+        <span class="poster">
+          <img class="l-bg" src="./a/epoch-bg.webp" alt="" width="640" height="960" decoding="async">
+          <img class="l-hero" src="./a/epoch-hero.webp" alt="" width="560" height="560" decoding="async">
+          <img class="l-logo" src="./a/epoch-logo.webp" alt="" width="480" height="480" decoding="async">
+          <span class="glare"></span>
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></span>
+        </span>
+        <span class="info">
+          <h3 class="name">만년 성벽</h3>
+          <span class="hook">돌멩이에서 소총까지, 병사를 진화시켜 만 년 성벽을 지켜라</span>
+          <span class="tags"><span class="tag tag-genre">시대 진화 디펜스</span><span class="tag tag-verb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l4.6.9a2 2 0 0 1 1.6 2.3l-.9 5A3 3 0 0 1 14.4 21h-3a3 3 0 0 1-2.4-1.2l-3.3-4.4a1.4 1.4 0 0 1 2-2z"/></svg>드래그</span></span>
+        </span>
+      </a>
+    </li>
+    <li style="--accent:#E0532F">
+      <a class="card" href="./bonfire/">
+        <span class="poster">
+          <img class="l-bg" src="./a/bonfire-bg.webp" alt="" width="640" height="960" decoding="async">
+          <img class="l-hero" src="./a/bonfire-hero.webp" alt="" width="560" height="560" decoding="async">
+          <img class="l-logo" src="./a/bonfire-logo.webp" alt="" width="480" height="480" decoding="async">
+          <span class="glare"></span>
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></span>
+        </span>
+        <span class="info">
+          <h3 class="name">모닥불 개척단</h3>
+          <span class="hook">벨까, 캘까. 탭 한 번이 오늘 밤을 가른다</span>
+          <span class="tags"><span class="tag tag-genre">성장 디펜스</span><span class="tag tag-verb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l4.6.9a2 2 0 0 1 1.6 2.3l-.9 5A3 3 0 0 1 14.4 21h-3a3 3 0 0 1-2.4-1.2l-3.3-4.4a1.4 1.4 0 0 1 2-2z"/></svg>탭</span></span>
+        </span>
+      </a>
+    </li>
+    <li style="--accent:#E9A21A">
+      <a class="card" href="./hoard/">
+        <span class="poster">
+          <img class="l-bg" src="./a/hoard-bg.webp" alt="" width="640" height="960" loading="lazy" decoding="async">
+          <img class="l-hero" src="./a/hoard-hero.webp" alt="" width="560" height="560" loading="lazy" decoding="async">
+          <img class="l-logo" src="./a/hoard-logo.webp" alt="" width="480" height="480" loading="lazy" decoding="async">
+          <span class="glare"></span>
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></span>
+        </span>
+        <span class="info">
+          <h3 class="name">와르르 보물산</h3>
+          <span class="hook">같은 보물을 톡, 빈자리로 와르르 연쇄가 터진다</span>
+          <span class="tags"><span class="tag tag-genre">물리 머지 퍼즐</span><span class="tag tag-verb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l4.6.9a2 2 0 0 1 1.6 2.3l-.9 5A3 3 0 0 1 14.4 21h-3a3 3 0 0 1-2.4-1.2l-3.3-4.4a1.4 1.4 0 0 1 2-2z"/></svg>탭</span></span>
+        </span>
+      </a>
+    </li>
+    <li style="--accent:#F07A1E">
+      <a class="card" href="./wreck/">
+        <span class="poster">
+          <img class="l-bg" src="./a/wreck-bg.webp" alt="" width="640" height="960" loading="lazy" decoding="async">
+          <img class="l-hero" src="./a/wreck-hero.webp" alt="" width="560" height="560" loading="lazy" decoding="async">
+          <img class="l-logo" src="./a/wreck-logo.webp" alt="" width="480" height="480" loading="lazy" decoding="async">
+          <span class="glare"></span>
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></span>
+        </span>
+        <span class="info">
+          <h3 class="name">와장창 철거단</h3>
+          <span class="hook">철구 한 방에 도미노처럼 무너지는 도시</span>
+          <span class="tags"><span class="tag tag-genre">물리 파괴</span><span class="tag tag-verb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l4.6.9a2 2 0 0 1 1.6 2.3l-.9 5A3 3 0 0 1 14.4 21h-3a3 3 0 0 1-2.4-1.2l-3.3-4.4a1.4 1.4 0 0 1 2-2z"/></svg>당겼다 놓기</span></span>
+        </span>
+      </a>
+    </li>
+    <li style="--accent:#6C4FE0">
+      <a class="card" href="./starhook/">
+        <span class="poster">
+          <img class="l-bg" src="./a/starhook-bg.webp" alt="" width="640" height="960" loading="lazy" decoding="async">
+          <img class="l-hero" src="./a/starhook-hero.webp" alt="" width="560" height="560" loading="lazy" decoding="async">
+          <img class="l-logo" src="./a/starhook-logo.webp" alt="" width="480" height="480" loading="lazy" decoding="async">
+          <span class="glare"></span>
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></span>
+        </span>
+        <span class="info">
+          <h3 class="name">별 낚시꾼</h3>
+          <span class="hook">올라갈 땐 피하고, 내려오며 별을 쓸어 담아라</span>
+          <span class="tags"><span class="tag tag-genre">수집 액션</span><span class="tag tag-verb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l4.6.9a2 2 0 0 1 1.6 2.3l-.9 5A3 3 0 0 1 14.4 21h-3a3 3 0 0 1-2.4-1.2l-3.3-4.4a1.4 1.4 0 0 1 2-2z"/></svg>좌우 드래그</span></span>
+        </span>
+      </a>
+    </li>
+    <li style="--accent:#4FA83A">
+      <a class="card" href="./corral/">
+        <span class="poster">
+          <img class="l-bg" src="./a/corral-bg.webp" alt="" width="640" height="960" loading="lazy" decoding="async">
+          <img class="l-hero" src="./a/corral-hero.webp" alt="" width="560" height="560" loading="lazy" decoding="async">
+          <img class="l-logo" src="./a/corral-logo.webp" alt="" width="480" height="480" loading="lazy" decoding="async">
+          <span class="glare"></span>
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></span>
+        </span>
+        <span class="info">
+          <h3 class="name">울타리 목장</h3>
+          <span class="hook">울타리 하나 박을 때마다 동물 전부가 한 칸씩</span>
+          <span class="tags"><span class="tag tag-genre">턴제 배치 퍼즐</span><span class="tag tag-verb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l4.6.9a2 2 0 0 1 1.6 2.3l-.9 5A3 3 0 0 1 14.4 21h-3a3 3 0 0 1-2.4-1.2l-3.3-4.4a1.4 1.4 0 0 1 2-2z"/></svg>탭</span></span>
+        </span>
+      </a>
+    </li>
+  </ul>
+</main>
+
+<footer>
+  <p class="foot-title">미니게임 오락실</p>
+  <p class="foot-lines">모든 게임은 Claude Code 게임 파이프라인으로 만들었어요.<br>그림·모션·일부 음악은 생성형 AI로 만들었어요.</p>
+  <p class="foot-links"><a href="https://github.com/junhee1219/game-pipeline">소스 코드</a><a href="./credits.html">라이선스 · 크레딧</a></p>
+</footer>
+
+<script>
+(() => {
+  document.documentElement.classList.add('js');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const items = [...document.querySelectorAll('.grid li')];
+  // 등장: 화면에 들어온 카드부터, 한 번에 들어온 것끼리 70ms 간격
+  if ('IntersectionObserver' in window && !reduce) {
+    const io = new IntersectionObserver(es => {
+      let n = 0;
+      for (const e of es) if (e.isIntersecting) { e.target.style.setProperty('--d', n++); e.target.classList.add('in'); io.unobserve(e.target); }
+    }, { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+    items.forEach(li => io.observe(li));
+  } else items.forEach(li => li.classList.add('in'));
+  if (reduce) return;
+  const cards = [...document.querySelectorAll('.card')];
+  // 데스크톱: 포인터를 따라 기울고, 겹마다 다른 깊이로 움직인다
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    for (const c of cards) {
+      let raf = 0, tx = 0, ty = 0;
+      c.addEventListener('pointermove', e => {
+        const r = c.getBoundingClientRect();
+        tx = (e.clientX - r.left) / r.width - .5; ty = (e.clientY - r.top) / r.height - .5;
+        c.classList.add('tilting');
+        if (!raf) raf = requestAnimationFrame(() => {
+          raf = 0;
+          c.style.setProperty('--ry', (tx * 12).toFixed(2) + 'deg'); c.style.setProperty('--rx', (-ty * 10).toFixed(2) + 'deg');
+          c.style.setProperty('--px', (tx * 2).toFixed(3)); c.style.setProperty('--py', (ty * 2).toFixed(3));
+          c.style.setProperty('--gx', ((tx + .5) * 100).toFixed(1) + '%'); c.style.setProperty('--gy', ((ty + .5) * 100).toFixed(1) + '%');
+        });
+      });
+      c.addEventListener('pointerleave', () => {
+        c.classList.remove('tilting');
+        for (const k of ['--rx', '--ry']) c.style.setProperty(k, '0deg');
+        for (const k of ['--px', '--py']) c.style.setProperty(k, 0);
+      });
+    }
+  }
+  // 모든 기기: 스크롤 위치에 따라 겹이 살짝 어긋난다(창 너머를 보는 깊이감)
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const vh = innerHeight;
+      for (const c of cards) {
+        const r = c.getBoundingClientRect();
+        if (r.bottom < -50 || r.top > vh + 50) continue;
+        const p = ((r.top + r.height / 2) - vh / 2) / vh;
+        c.style.setProperty('--sy', Math.max(-1, Math.min(1, p)).toFixed(3));
+      }
+    });
+  };
+  addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll); onScroll();
+})();
+</script>
+</body>
+</html>
